@@ -89,10 +89,7 @@ const InviteModal = () => {
             disabled={isLoading}
             variant="link"
             size="sm"
-            className={cn(
-              "text-xs text-zinc-500 mt-4",
-              "rotate-180" && isLoading
-            )}
+            className="text-xs text-zinc-500 mt-4"
           >
             Generate a new link
             <RefreshCw className="w-4 h-4 ml-2" />
