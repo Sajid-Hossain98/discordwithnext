@@ -61,7 +61,6 @@ const MembersModal = () => {
         url: `/api/members/${memberId}`,
         query: {
           serverId: server?.id,
-          memberId,
         },
       });
 
@@ -71,6 +70,7 @@ const MembersModal = () => {
       onOpen("members", { server: response.data });
     } catch (error) {
       console.log(error);
+    } finally {
       setLoadingId("");
     }
   };
