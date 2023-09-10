@@ -1,11 +1,13 @@
 "use client";
 
 import { Search } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   CommandDialog,
   CommandEmpty,
+  CommandGroup,
   CommandInput,
+  CommandItem,
   CommandList,
 } from "@/components/ui/command";
 
@@ -26,6 +28,21 @@ interface ServerSearchProps {
 const ServerSearch = ({ data }: ServerSearchProps) => {
   const [open, setOpen] = useState<boolean>(false);
 
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setOpen((open) => !open);
+      }
+    };
+
+    document.addEventListener("keydown", down);
+
+    return () => {
+      document.removeEventListener("keydown", down);
+    };
+  }, []);
+
   return (
     <>
       <button
@@ -44,6 +61,22 @@ const ServerSearch = ({ data }: ServerSearchProps) => {
         <CommandInput placeholder="search all channels and members" />
         <CommandList>
           <CommandEmpty>No results</CommandEmpty>
+          {data.map(({ label, type, data }) => {
+            if (!data?.length) return null;
+
+            return (
+              <CommandGroup key={label} heading={label}>
+                {data?.map(({ id, icon, name }) => {
+                  return (
+                    <CommandItem key={id} className="cursor-pointer">
+                      {icon}
+                      <span>{name}</span>
+                    </CommandItem>
+                  );
+                })}
+              </CommandGroup>
+            );
+          })}
         </CommandList>
       </CommandDialog>
     </>
