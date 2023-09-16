@@ -5,6 +5,7 @@ import { Modak, Open_Sans } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { cn } from "@/lib/utils";
 import { ModalProvider } from "@/components/providers/ModalProvider";
+import SocketProvider from "@/components/providers/SocketProvider";
 
 const font = Open_Sans({ subsets: ["latin"] });
 
@@ -28,8 +29,10 @@ export default function RootLayout({
             enableSystem={false}
             storageKey="discordwithnext-theme"
           >
-            <ModalProvider />
-            {children}
+            <SocketProvider>
+              <ModalProvider />
+              {children}
+            </SocketProvider>
           </ThemeProvider>
         </body>
       </html>
