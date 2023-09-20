@@ -8,6 +8,20 @@ body,
   height: 100%;
 }
 
+.scrollbar-w-2::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.scrollbar-thumb::-webkit-scrollbar-thumb {
+  background-color: #1e1f22;
+  border-radius: 1.5rem;
+}
+
+.scrollbar-thumb-light::-webkit-scrollbar-thumb {
+  background-color: #31333886;
+  border-radius: 1.5rem;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
